@@ -1,0 +1,22 @@
+div#filterDev{
+	width: 500px;
+	position: relative;
+}
+span.glyphicon-menu-right,
+span.glyphicon-menu-Down,
+span.glyphicon-menu-Up{
+	float: right;
+	cursor: pointer;
+}
+
+div.backIconDev{
+	cursor: pointer;
+}
+span.backIcon{
+	position: absolute;
+	left: 10px;
+	top: 5px;
+}
+div.backIconDev{
+	margin: 15px;
+}

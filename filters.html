@@ -1,0 +1,77 @@
+<html>
+	<head>
+		<title>Filters</title>
+	</head>
+	<link rel="stylesheet" href="bootstrap.css">
+	<link rel="stylesheet" href="filter.css">
+	<body>
+		<div id="filterDev"></div>
+	</body>
+	<script src="jquery.min.js"></script>
+	<script src="bootstrap.min.js"></script>
+	<script src="filters.js"></script>
+	<script>
+    $(function(){
+    	var data = [
+      {
+         text: 'Parent 1',
+         id: '1',
+         nodes:[
+			         {
+			         	 text: 'Parent1-Children1',
+			         	 id: 'Parent1-Children1',
+                 content: {
+                  input: true,
+                  attr: {
+                    type: 'text',
+                    name: 'PCinput',
+                    id: 'input1'
+                  }
+                 }
+			         },
+			         {
+			         	 text: 'Parent1-Children2',
+			         	 id: 'Parent1-Children2'
+			         }
+
+         ]
+      },
+      {
+      	text: 'Parent 2',
+      	id: '2',
+      	nodes: [
+      	{
+      		text: 'Parent2-Children1',
+      		id: 'Parent2-Children1'
+      	}
+      	]
+      },
+      {
+      	text: 'Parent 3',
+      	id: '3',
+      	nodes: [
+      	{
+      		text: 'Parent3-Children1',
+      		id: 'Parent3-Children1'
+      	}
+      	]
+      },
+      {
+      	text: 'Parent 4',
+      	id: '4',
+      	nodes: [
+      	{
+      		text: 'Parent4-Children1',
+      		id: 'Parent4-Children1'
+      	},
+      	{
+      		text: 'Parent4-Children2',
+      		id: 'Parent4-Children2'
+      	}
+      	]
+      }
+    	];
+    		$('#filterDev').filters({ data: data})
+    })
+	</script>
+</html>
