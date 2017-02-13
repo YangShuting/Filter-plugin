@@ -16,18 +16,31 @@
       {
          text: 'Parent 1',
          id: '1',
+         mutex: 'group1',
          nodes:[
 			         {
 			         	 text: 'Parent1-Children1',
 			         	 id: 'Parent1-Children1',
-                 content: {
-                  input: true,
+                 content: [
+                 {
+                  htmlType: 'input',
+                  text: 'Name',
                   attr: {
                     type: 'text',
                     name: 'PCinput',
                     id: 'input1'
                   }
+                 },
+                  {
+                  htmlType: 'input',
+                  text: '12',
+                  attr: {
+                    type: 'checkbox',
+                    name: 'PCinput',
+                    id: 'checkBox1'
+                  }
                  }
+                 ]
 			         },
 			         {
 			         	 text: 'Parent1-Children2',
@@ -39,6 +52,7 @@
       {
       	text: 'Parent 2',
       	id: '2',
+        mutex: 'group1',
       	nodes: [
       	{
       		text: 'Parent2-Children1',
@@ -49,16 +63,28 @@
       {
       	text: 'Parent 3',
       	id: '3',
+        mutex: false,
       	nodes: [
       	{
       		text: 'Parent3-Children1',
-      		id: 'Parent3-Children1'
-      	}
-      	]
+      		id: 'Parent3-Children1',
+          content: [
+                 {
+                  htmlType: 'input',
+                  text: 'Name',
+                  attr: {
+                    type: 'text',
+                    name: 'PCinput',
+                    id: 'input1'
+                  }
+                 }
+      	      ]
+      }]
       },
       {
       	text: 'Parent 4',
       	id: '4',
+        mutex: false,
       	nodes: [
       	{
       		text: 'Parent4-Children1',
@@ -69,6 +95,36 @@
       		id: 'Parent4-Children2'
       	}
       	]
+      },
+      {
+        text: 'Parent 5',
+        id: '4',
+        mutex: 'group3',
+        nodes: [
+        {
+          text: 'Parent5-Children1',
+          id: 'Parent5-Children1'
+        },
+        {
+          text: 'Parent5-Children2',
+          id: 'Parent5-Children2'
+        }
+        ]
+      },
+      {
+        text: 'Parent 6',
+        id: '4',
+        mutex: 'group3',
+        nodes: [
+        {
+          text: 'Parent6-Children1',
+          id: 'Parent6-Children1'
+        },
+        {
+          text: 'Parent6-Children2',
+          id: 'Parent6-Children2'
+        }
+        ]
       }
     	];
     		$('#filterDev').filters({ data: data})
