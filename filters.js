@@ -37,7 +37,7 @@ console.log('load the filter.js successfully!');
     this.destroy();
     this.subscribeEvents();
     this.setInitializedState({nodes: this.tree}, 0);
-    this.render();
+    this.render({nodes: this.tree});
   }
 
   Filter.prototype.destroy = function(){
@@ -81,30 +81,41 @@ console.log('load the filter.js successfully!');
      });
   }
 
-  Filter.prototype.render = function(){
+  Filter.prototype.render = function(nodes){
+    var _this = this;
     if(!this.initialized){
       this.$element.addClass(pluginName);
-      this.$wrapper = $(this.template.list);
+      var groups = this.findMutexGroup(nodes);
+      this.$groups = groups;
+      this.$element.empty();
+      $.each(groups, function createListGroup(index, group){
+        var $wrapper = $(_this.template.list);
+        var $listWrapper = $(_this.template.listWrapper).attr('data-listId', index);
+        $listWrapper.append($wrapper);
+        _this.$element.append($listWrapper.empty());
+        _this.buildTree(group, $wrapper, $listWrapper);
+      });
       this.initialized = true;
     }
-
-    this.$element.empty().append(this.$wrapper.empty());
-    this.buildTree(this.tree, 0);
   }
 
-  Filter.prototype.buildTree = function(nodes){
+  Filter.prototype.buildTree = function(nodes, $wrapper, $listWrapper){
     if(!nodes) return;
 
     var _this = this;
     $.each(nodes, function addNodes(id, node){
       var treeItem = $(_this.template.item).attr('data-nodeid', node.nodeId);
       treeItem.append(node.text);
-      if(node.state.parent){
+      if(node.state.parent && node.hasOwnProperty('mutex') && node['mutex']!= false){
         if(node.nodes){
           treeItem.append($(_this.template.icon).addClass(_this.options.menuRight));
         }
-        _this.$wrapper.append(treeItem);
       }
+      else{
+        treeItem.append($(_this.template.icon).addClass(_this.options.menuDown));
+      }
+      $wrapper.append(treeItem);
+      $listWrapper.append($wrapper);
     });
   }
 
@@ -112,6 +123,9 @@ console.log('load the filter.js successfully!');
     list: '<div class="list-group"></div>',
     item: '<div class="list-group-item"></div>',
     icon: '<span class="icon"></span>',
+    listWrapper: '<div class="listWrapper"></div>',
+    itemContent: '<div class="itemContent row"></div>',
+    itemDev: '<div class="itemDev col-md-12"></div>',
     backIcon: '<div class="backIconDev"><span class="backIcon"></span></div>'
   }
 
@@ -119,15 +133,24 @@ console.log('load the filter.js successfully!');
     var target = $(event.target);
     var node = this.findNode(target);
     if(!node) return;
+
     var classList = target.attr('class') ? target.attr('class').split(' '): [];
     if((classList.indexOf('glyphicon-menu-right')!== -1)){
-      this.toggleChildModule(node, _default.options);
+      this.toggleChildModule(target, node);
     }
     else if((classList.indexOf('glyphicon-menu-left')!== -1)){
-      this.toggleParentModule();
+      this.toggleParentModule(target, node);
     }
-    else if((classList.indexOf('glyphicon-menu-Up')!==-1)){
-      this.toggleChildItem(node);
+    else if((classList.indexOf('glyphicon-menu-down')!== -1)){
+      this.buildItem(target);
+    }
+    else if((classList.indexOf('glyphicon-menu-Up')!== -1)){
+      if((classList.indexOf('itemUp')!== -1)){
+         this.itemClear(target);
+      }
+      else{
+      this.clearItem(target);
+      }
     }
   }
 
@@ -135,28 +158,82 @@ console.log('load the filter.js successfully!');
       var node;
       var nodeId = target.closest('div.list-group-item').attr('data-nodeid') || target;
       nodeId && (node = this.nodes[nodeId]) || (node = target);
-      if(!node) console.log('Error: ndoes not found.');
+      if(!node) console.log('Error: nodes not found.');
       return node;
   }
 
-  Filter.prototype.toggleChildModule = function(node){
+  Filter.prototype.toggleChildModule = function(target, node){
       /*Clear all the parent lists*/
       var _this = this;
-      this.$element.empty();
+      var $listWrapper = target.closest('div.listWrapper');
+      var $wrapper = target.closest('div.list-group');
+      $wrapper.empty();
+    
       /*generate the children panel*/
-      this.$element.append($(_this.template.backIcon).addClass(this.options.menuLeft));
-      _this.$wrapper = $(_this.template.list);
-      _this.$element.append(_this.$wrapper);
       $.each(node.nodes, function createChild(index, node){
          var treeItem = $(_this.template.item).attr('data-nodeid', node.nodeId);
          treeItem.append($(_this.template.icon).addClass(_this.options.menuDown));
          treeItem.append(node.text);
-         _this.$wrapper.append(treeItem);
+         $wrapper.append(treeItem);
       });
+      $listWrapper.prepend($(_this.template.backIcon).addClass(this.options.menuLeft));
   }
 
-  Filter.prototype.toggleParentModule = function(){
-      this.render();
+  Filter.prototype.toggleParentModule = function(target, node){
+      var $wrapper = $(this.template.list);
+      var $listWrapper = target.closest('div.listWrapper');
+      var listId = $listWrapper.attr('data-listid');
+      $listWrapper.empty();
+      this.buildTree(this.$groups[listId], $wrapper, $listWrapper);
+  }
+
+  Filter.prototype.buildItem = function(target){
+      var _this = this; 
+      var nodeItem =  target.closest('div.list-group-item');
+      var iconChange = target.closest('span.glyphicon');
+      iconChange.removeClass('glyphicon-menu-down').addClass('glyphicon-menu-Up itemUp');
+      var nodeId = nodeItem.attr('data-nodeid');
+      var node = this.nodes[nodeId];
+      var contentWrapper = $(this.template.itemContent);
+        var node1 = node.content || node.nodes;
+        $.each(node1, function addContents(index, item){
+          var $ele = document.createElement(item.htmlType);
+          var itemDev = $(_this.template.itemDev);
+          for( var key in item.attr){
+            $ele.setAttribute(key, item.attr[key]);
+          }
+          $ele.append(item.text);
+          itemDev.append($ele);
+          contentWrapper.append(itemDev);
+        });
+        nodeItem.append(contentWrapper);
+  }
+
+  Filter.prototype.itemClear = function(target){
+      var iconChange = target.closest('span.glyphicon');
+      iconChange.removeClass('glyphicon-menu-Up').addClass('glyphicon-menu-down');
+      var listGroupItem =  target.closest('div.list-group-item');
+      var itemContent = listGroupItem.children();
+      itemContent.empty();
+  }
+
+  Filter.prototype.findMutexGroup = function(nodes){
+    return this.groupBy(nodes, function(item){
+      return [item.mutex];
+    });
+  }
+
+  /*Better practice: curry function*/
+  Filter.prototype.groupBy = function(nodes, fn){
+    var groups = {};
+    $.each(nodes.nodes, function group(index, item){
+      var group = JSON.stringify(fn(item));
+      groups[group] = groups[group] || [];
+      groups[group].push(item);
+    });
+    return Object.keys(groups).map(function(group){
+      return groups[group];
+    });
   }
 
   $.fn[pluginName] = function(options, args){
