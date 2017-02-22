@@ -6,16 +6,18 @@ console.log('load the filter.js successfully!');
   var _default = {};
   _default.settings = {
     levels: 2,
-    menuRight: 'glyphicon glyphicon-menu-right',
-    menuLeft: 'glyphicon glyphicon-menu-left',
-    menuUp: 'glyphicon glyphicon-menu-up',
-    menuDown: 'glyphicon glyphicon-menu-down'
+    menuRight: 'fa fa-chevron-right',
+    menuLeft: 'fa fa-chevron-left',
+    menuUp: 'fa fa-chevron-up',
+    menuDown: 'fa fa-chevron-down',
+    customEventHandler: null
   };
 
   var Filter = function(element, options){
     this.$element = $(element);
     this.elementId = element.id;
     this.init(options);
+    
     return {
       options: this.options,
       init: $.proxy(this.init, this),
@@ -108,11 +110,13 @@ console.log('load the filter.js successfully!');
       treeItem.append(node.text);
       if(node.state.parent && node.hasOwnProperty('mutex') && node['mutex']!= false){
         if(node.nodes){
-          treeItem.append($(_this.template.icon).addClass(_this.options.menuRight));
+          var icon = $(_this.template.icon).addClass(_this.options.menuRight);
+          treeItem.append($(_this.template.iconWrapper).addClass('icon-Right').append(icon));
         }
       }
       else{
-        treeItem.append($(_this.template.icon).addClass(_this.options.menuDown));
+        var icon = $(_this.template.icon).addClass(_this.options.menuDown)
+        treeItem.append($(_this.template.iconWrapper.addClass('icon-Down').append(icon)));
       }
       $wrapper.append(treeItem);
       $listWrapper.append($wrapper);
@@ -122,10 +126,12 @@ console.log('load the filter.js successfully!');
   Filter.prototype.template = {
     list: '<div class="list-group"></div>',
     item: '<div class="list-group-item"></div>',
-    icon: '<span class="icon"></span>',
+    iconWrapper: '<span class="iconWrapper"></span>',
+    icon: '<i class="icon" aria-hidden="true"></i>',
     listWrapper: '<div class="listWrapper"></div>',
-    itemContent: '<div class="itemContent row"></div>',
+    itemContent: '<div class="itemContent"></div>',
     itemDev: '<div class="itemDev col-md-12"></div>',
+    itemLabel: '<label class="col-md-3"></label>',
     backIcon: '<div class="backIconDev"><span class="backIcon"></span></div>'
   }
 
@@ -135,16 +141,16 @@ console.log('load the filter.js successfully!');
     if(!node) return;
 
     var classList = target.attr('class') ? target.attr('class').split(' '): [];
-    if((classList.indexOf('glyphicon-menu-right')!== -1)){
+    if((classList.indexOf('fa-chevron-right')!== -1)){
       this.toggleChildModule(target, node);
     }
-    else if((classList.indexOf('glyphicon-menu-left')!== -1)){
+    else if((classList.indexOf('fa-chevron-left')!== -1)){
       this.toggleParentModule(target, node);
     }
-    else if((classList.indexOf('glyphicon-menu-down')!== -1)){
+    else if((classList.indexOf('fa-chevron-down')!== -1)){
       this.buildItem(target);
     }
-    else if((classList.indexOf('glyphicon-menu-Up')!== -1)){
+    else if((classList.indexOf('fa-chevron-up')!== -1)){
       if((classList.indexOf('itemUp')!== -1)){
          this.itemClear(target);
       }
@@ -152,8 +158,17 @@ console.log('load the filter.js successfully!');
       this.clearItem(target);
       }
     }
+    else if(classList.indexOf('eventHandler')!==-1){
+      this.customFun(target, classList);
+    }
   }
 
+  Filter.prototype.customFun = function(target, classList){
+      if( $.isFunction(this.customFun)){
+      this.options.customEventHandler.call(this, target, classList);
+    }
+  }
+  
   Filter.prototype.findNode = function(target){
       var node;
       var nodeId = target.closest('div.list-group-item').attr('data-nodeid') || target;
@@ -171,12 +186,15 @@ console.log('load the filter.js successfully!');
     
       /*generate the children panel*/
       $.each(node.nodes, function createChild(index, node){
+         var iconWrapper = $(_this.template.iconWrapper).addClass('icon-Down');
+         var icon = $(_this.template.icon).addClass(_this.options.menuDown); 
          var treeItem = $(_this.template.item).attr('data-nodeid', node.nodeId);
-         treeItem.append($(_this.template.icon).addClass(_this.options.menuDown));
+         treeItem.append(iconWrapper.append(icon));
          treeItem.append(node.text);
          $wrapper.append(treeItem);
       });
       $listWrapper.prepend($(_this.template.backIcon).addClass(this.options.menuLeft));
+      $listWrapper.find('div.list-group-item > span.iconWrapper > i.fa-chevron-down:first').trigger('click');
   }
 
   Filter.prototype.toggleParentModule = function(target, node){
@@ -190,31 +208,51 @@ console.log('load the filter.js successfully!');
   Filter.prototype.buildItem = function(target){
       var _this = this; 
       var nodeItem =  target.closest('div.list-group-item');
-      var iconChange = target.closest('span.glyphicon');
-      iconChange.removeClass('glyphicon-menu-down').addClass('glyphicon-menu-Up itemUp');
+      var iconChange = target.closest('i.fa');
+      var iconWrapper = target.closest('span.iconWrapper');
+      iconWrapper.removeClass('icon-Down').addClass('icon-Up');
+      iconChange.removeClass('fa-chevron-down').addClass('fa-chevron-up itemUp');
       var nodeId = nodeItem.attr('data-nodeid');
       var node = this.nodes[nodeId];
-      var contentWrapper = $(this.template.itemContent);
-        var node1 = node.content || node.nodes;
-        $.each(node1, function addContents(index, item){
-          var $ele = document.createElement(item.htmlType);
-          var itemDev = $(_this.template.itemDev);
-          for( var key in item.attr){
-            $ele.setAttribute(key, item.attr[key]);
-          }
-          $ele.append(item.text);
-          itemDev.append($ele);
-          contentWrapper.append(itemDev);
-        });
-        nodeItem.append(contentWrapper);
+      var node1 = node.nodes || node.content;
+      this.renderItem(node1, nodeItem);
   }
 
+    Filter.prototype.renderItem = function(node, nodeItem){
+      var _this = this;
+        var contentWrapper = $(this.template.itemContent);
+    $.each(node, function addContents(index, item){
+      if(item instanceof Array){
+        var itemDev = $(_this.template.itemDev);
+        var itemWrapperRow = $('<div>').addClass('row');
+        $.each(item, function loopItem(index, item){
+          if(item){
+              itemDev.append(item);
+              itemWrapperRow.append(itemDev);
+              contentWrapper.append(itemWrapperRow);
+            }   
+        })
+      }
+      else{
+        $.each(item.content, function loopItem1(index, ele){
+          var itemDev = $(_this.template.itemDev);
+          var itemWrapperRow = $('<div>').addClass('row');
+          $.each(ele, function loopItem2(index, ele1){
+            itemDev.append(ele1);
+            itemWrapperRow.append(itemDev);    
+          })
+          contentWrapper.append(itemWrapperRow);
+        })
+      }   
+    });
+    nodeItem.append(contentWrapper);
+    }
   Filter.prototype.itemClear = function(target){
-      var iconChange = target.closest('span.glyphicon');
-      iconChange.removeClass('glyphicon-menu-Up').addClass('glyphicon-menu-down');
+      var iconChange = target.closest('i.fa');
+      iconChange.removeClass('fa-chevron-up').addClass('fa-chevron-down');
       var listGroupItem =  target.closest('div.list-group-item');
-      var itemContent = listGroupItem.children();
-      itemContent.empty();
+      var itemContent = listGroupItem.find('div.itemContent');
+      itemContent.remove();
   }
 
   Filter.prototype.findMutexGroup = function(nodes){
@@ -239,6 +277,9 @@ console.log('load the filter.js successfully!');
   $.fn[pluginName] = function(options, args){
     this.each(function(){
       $.data(this, pluginName, new Filter(this, $.extend(true, {}, options)));
+      if( $.isFunction(_default.settings.complete)){
+          _default.settings.call(this);
+        }
     });
   }
 
