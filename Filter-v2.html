@@ -1,0 +1,294 @@
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+	</head>
+	<body>
+	<main class="jumbotron" role="main">
+		<div class="container text-center">
+			<h1>Filters plugin</h1>
+			<p class="lead">
+				support classify your filter panel.
+			</p>
+			<p class="btn btn-outline-inverse btn-lg">
+				Download Filters
+			</p>
+			<p class="version">Current v0.0.1</p>
+			<p class="version"><a href="https://github.com/YangShuting/Filter-plugin"><i class="fa fa-github"></i>Github</a></p>
+		</div>
+	</main>
+	<div class="container">
+	<section>
+			<h2>Why should I use filters plugin?</h2>
+			<p>In some cases, you will have some info which need to classify and put them to different panels. See below examples for your specific requirements.</p>
+	</section>
+	<section>
+		<h2>Getting started with filters plugin.</h2>
+		<p>Filters plugin rely on jQuery, Bootstrap 4 CSS file. Using Filters plugin, you should include above files and a Filters javascript file.</p>
+		<h3>Downloading the code locally.</h3>
+		<ul>
+			<li>Download the code from this page.</li>
+			<li>include the following lines of code in the <head> section of your html.</li>
+			<code>
+				&lt;script  src="path/to/filters.js"&gt; &lt;script&gt;
+			</code>	
+			<li>Check out some examples to start using the additional features of Filters.</li>
+		</ul>
+	</section>
+	<div class="container">
+		<h3>Examples</h3>
+		<h4>The basics</h4>
+		<div class="basicExample"></div>
+		<p>For this basic example, you will have four different kinds of info to show: Education, medical, environment and others. Each kind of info has its own contents. Education, medical and environment are mutex, which means you can not choose them at the same time. For the Enducation panel, when you click this panel, you can see its content---the classcification of education. Same as other panels.</p>
+		<div class="text-left">
+			<p>Set the content to show.</p>
+			<pre class="highlight">
+				<code>
+					var basicData = [
+							{
+								text: 'Education',
+								id: '0',
+								mutex: 'group1',
+								class: 'bg-primary',
+								nodes: [
+									{
+										text: 'Primary',
+										id: '1',
+										class: 'bg-primary',
+										content:[
+											['&lt;div class="col-md-12"&gt;&lt;label for="TeacherLevel" class="form-check-label"&gt;&lt;input class="eventHandler form-check-input mr-2" type="checkbox" data-target="TeacherLevel" name="TeacherLevel"/&gt;Teacher certification level 4&lt;/label&gt;&lt;/div&gt;'],
+											['&lt;div class="col-md-12"&gt;&lt;label for="LanguageLevel" class="form-check-label"&gt;&lt;input class="eventHandler form-check-input mr-2" type="checkbox" data-target="LanguageLevel" name="LanguageLevel"/&gt;Language Skills Level&lt;/label&gt;&lt;/div&gt;']
+										]
+									},
+									{
+										text: 'Junior high',
+										id: '1',
+										class: 'bg-primary',
+										content:[
+											['&lt;div class="col-md-12"&gt;&lt;label for="TeacherLevel" class="form-check-label">&lt;input class="eventHandler form-check-input mr-2" type="radio" data-target="TeacherLevel" name="EntryLevelTest"/&gt;Entry level test 1&lt;/label&gt;&lt;/div&gt;'],
+											['&lt;div class="col-md-12"&gt;&lt;label for="LanguageLevel" class="form-check-label"&gt;&lt;input class="eventHandler form-check-input mr-2" type="radio" data-target="LanguageLevel" name="EntryLevelTest"/&gt;Entry level test 2&lt;/label&gt;&lt;/div&gt;']
+										]
+									},
+									{
+										text: 'Senior high',
+										id: '1',
+										class: 'bg-primary',
+										content:[
+											['&lt;div class="col-md-6"&gt;Testing content&lt;/div&gt;'],
+											['&lt;div class="col-md-6"&gt;Testing content&lt;/div&gt;']
+										]
+									},
+									{
+										text: 'College',
+										id: '1',
+										class: 'bg-primary',
+										content:[
+											['&lt;div class="col-md-6"&gt;Testing content&lt;/div&gt;'],
+											['&lt;div class="col-md-6"&gt;Testing content&lt;/div&gt;']
+										]
+									}
+								]
+							},
+							{
+								text: 'Medical',
+								id: '0',
+								mutex: 'group1',
+								class: 'bg-primary',
+								nodes: [
+									{
+										text: 'Surgical equipment',
+										id: '1',
+										class: 'bg-primary',
+										content:[
+											['&lt;div class="col-md-6"&gt;&lt;label for="healthSafety_recordable" class="form-check-label"&gt;&lt;input class="eventHandler form-check-input mr-2" type="checkbox" data-target="healthSafety_recordable_hiddenInput" name="healthSafety_recordable"/&gt;Recordable cases&lt;/label&gt;&lt;/div&gt;'],
+											['&lt;div class="col-md-6"&gt;&lt;label for="healthSafety_recordable" class="form-check-label"&gt;&lt;input class="eventHandler form-check-input mr-2" type="checkbox" data-target="healthSafety_recordable_hiddenInput" name="healthSafety_recordable"/&gt;First Aid Cases&lt;/label&gt;&lt;/div&gt;']
+										]
+									},
+									{
+										text: 'Medical training',
+										id: '1',
+										class: 'bg-primary',
+										content:[
+											['&lt;div class="col-md-6"&gt;Testing content&lt;/div&gt;'],
+											['&lt;div class="col-md-6"&gt;Testing content&lt;/div&gt;']
+										]
+									}
+								]
+							},
+							{
+								text: 'Environment',
+								id: '0',
+								mutex: 'group1',
+								class: 'bg-primary',
+								nodes: [
+									{
+										text: 'Garbage collection',
+										id: '1',
+										class: 'bg-primary',
+										content:[
+											['&lt;div class="col-md-6"&gt;Testing content&lt;/div&gt;'],
+											['&lt;div class="col-md-6"&gt;Testing content&lt;/div&gt;']
+										]
+									},
+									{
+										text: 'Plant trees',
+										id: '1',
+										class: 'bg-primary',
+										content:[
+											['&lt;div class="col-md-6"&gt;Testing content&lt;/div&gt;'],
+											['&lt;div class="col-md-6"&gt;Testing content&lt;/div&gt;']
+										]
+									}
+								]
+							},
+							{
+								text: 'Others',
+								id: '0',
+								mutex: false,
+								class: 'bg-primary',
+								nodes: [
+									{
+										text: 'Television entertainment',
+										id: '1',
+										class: 'bg-primary',
+										content:[
+											['&lt;div class="col-md-6"&gt;Television entertainment&lt;/div&gt;'],
+											['&lt;div class="col-md-6"&gt;Public welfare&lt;/div&gt;']
+										]
+									}
+								]
+							}
+					]
+				</code>	
+			</pre>
+			<code>
+				$('.basicExample').filters({
+					data: basicData
+				})
+			</code>
+		</div>
+		<h4>Advanced examples</h4>
+		<p>Above example is a basic one, to show the classification info of each panel. What if I want to do some interaction with the panel? Below example will show you how.</p>
+		<p>Click the Metrics panel, you will see there are two child panels, and choose the checkbox , you will see some other elements show on the right side.</p>
+		<p>Click the Environment panel, and choose the start and end date. It uses the date library---datepickr</p>
+		<p>Above two steps are the examples of interactions with the panel and using other library. you will see how to complete with codes.</p>
+		<div class="filterDev"></div>	
+		<pre class="highlight">
+			<code>
+				var data = [
+						{
+							text: 'Metrics',
+							id: '0',
+							mutex: 'group1',
+							class: 'bg-primary',
+							nodes: [
+								{
+									text: 'Health & Safety',
+									id: '1',
+									class: 'bg-primary',
+									content:[
+										['&lt;div class="col-md-6"&gt;&lt;label for="healthSafety_recordable" class="form-check-label"&gt;&lt;input class="eventHandler form-check-input mr-2" type="checkbox" data-target="healthSafety_recordable_hiddenInput" name="healthSafety_recordable"/&gt;Recordable cases&lt;/label&gt;&lt;/div&gt;'],
+										['&lt;div class="col-md-6"&gt;&lt;label for="healthSafety_recordable" class="form-check-label"&gt;&lt;input class="eventHandler form-check-input mr-2" type="checkbox" data-target="healthSafety_recordable_hiddenInput" name="healthSafety_recordable"/&gt;First Aid Cases&lt;i class="fa fa-question-circle text-secondary pointer" role="button" data-toggle="tooltip" data-original-title="Please see the detail tips." data-placement="right"&gt;&lt;/i&gt;&lt;/label&gt;&lt;/div&gt;']
+									],
+									onPanelActived: activeFunc
+								},
+								{
+									text: 'Environment',
+									id: '1',
+									class: 'bg-primary',
+									content:[
+										['&lt;div class="col-md-12"&gt;&lt;label class="control-label"&gt;Select Application:&lt;/label&gt;&lt;/div&gt;'],
+										['&lt;div class="col-md-12"&gt;&lt;select class="form-control rendered-select" name="UI_appScope"&gt;&lt;option value = "All"&gt;All&lt;/option&gt;&lt;optgroup label="Specialized Processes"&gt;&lt;option value="149"&gt;Condition Reporting&lt;/option&gt;&lt;option value="150"&gt;Water Watch&lt;/option&gt;&lt;/optgroup&gt;&lt;optgroup label="Chemical & Product Management"&gt;&lt;option value="101"&gt;U.S. TSCAIUR Reporting&lt;/option&gt;&lt;/optgroup&gt;&lt;/select&gt;&lt;/div&gt;'],
+										['&lt;div class="col-md-12"&gt;&lt;label class="control-label"&gt;Select Device:&lt;/label&gt;&lt;/div&gt;'],
+										['&lt;div class="col-md-12"&gt;&lt;select class="form-control rendered-select" name="UI_appScope"&gt;&lt;option value = "All"&gt;All&lt;/option&gt;&lt;optgroup label="Specialized Processes"&gt;&lt;option value="149"&gt;Condition Reporting&lt;/option&gt;&lt;option value="150"&gt;Water Watch&lt;/option&gt;&lt;/optgroup&gt;&lt;optgroup label="Chemical & Product Management"&gt;&lt;option value="101"&gt;U.S. TSCAIUR Reporting&lt;/option&gt;&lt;/optgroup&gt;&lt;/select&gt;&lt;/div&gt;'],
+										['&lt;div class="col-md-3"&gt;&lt;label class="control-label"&gt;Start Date:&lt;/label&gt;&lt;/div&gt;&lt;div class="col-md-9"&gt;&lt;div class="input-group"&gt;&lt;input type="text" class="datepicker flatpickr-input form-control"/&gt;&lt;div class="input-group-addon bg-secondary"&gt;&lt;i class="fa fa-calendar"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;'],
+										['&lt;div class="col-md-3"&gt;&lt;label class="control-label"&gt;End Date:&lt;/label&gt;&lt;/div&gt;&lt;div class="col-md-9"&gt;&lt;div class="input-group"&gt;&lt;input type="text" class="datepicker flatpickr-input form-control"/&gt;&lt;div class="input-group-addon bg-secondary"&gt;&lt;i class="fa fa-calendar"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;']
+
+									],
+									onPanelActived: activeFunc
+								}
+							]
+						},
+						{
+							text: 'Visualize Data',
+							id: '0',
+							mutex: 'group1',
+							class: 'bg-primary',
+							nodes: [
+								{
+									text: 'Visualize Data',
+									id: '1',
+									class: 'bg-primary',
+									content:[
+										['&lt;div class="col-md-6"&gt;&lt;label for="healthSafety_recordable" class="form-check-label"&gt;&lt;input class="eventHandler form-check-input mr-2" type="checkbox" data-target="healthSafety_recordable_hiddenInput" name="healthSafety_recordable"/&gt;Recordable cases&lt;/label>&lt;/div&gt;'],
+										['&lt;div class="col-md-6"&gt;&lt;label for="healthSafety_recordable" class="form-check-label"&gt;&lt;input class="eventHandler form-check-input mr-2" type="checkbox" data-target="healthSafety_recordable_hiddenInput" name="healthSafety_recordable"/&gt;First Aid Cases&lt;i class="fa fa-question-circle text-secondary pointer" role="button" data-toggle="tooltip" data-original-title="Please see the detail tips." data-placement="right"&gt;&lt;/i&gt;&lt;/label&gt;&lt;/div&gt;']
+									],
+									onPanelActived: activeFunc
+								},
+								{
+									text: 'Health & Safety',
+									id: '1',
+									class: 'bg-primary',
+									content:[
+										['&lt;div class="col-md-12"&gt;&lt;label class="form-check-label"&gt;&gt;input type="radio" class="form-check-input" name="UI_History" value="all"&gt;Full User History&lt;label&gt;&lt;/div&gt;'],
+										['&lt;div class="col-md-12"&gt;&lt;label class="form-check-label"&gt;&lt;input type="radio" class="form-check-input" name="UI_History" value="all"&gt;Key Action History&lt;label&gt;&lt;/div&gt;']
+									]
+								}
+							]
+						},
+						{
+							text: 'NotMetux',
+							id: '0',
+							mutex: false,
+							class: 'bg-primary',
+							nodes: [
+								{
+									text: 'Health & Safety',
+									id: '1',
+									class: 'bg-primary',
+									content:[
+										['&lt;div class="col-md-12"&gt;&lt;label class="form-check-label"&gt;&lt;input type="radio" class="form-check-input" name="UI_History" value="all"&gt;Full User History&lt;label&gt;&lt;/div&gt;'],
+										['&lt;div class="col-md-12"&gt;&lt;label class="form-check-label"&gt;&lt;input type="radio" class="form-check-input" name="UI_History" value="all"&gt;Key Action History&lt;label&gt;&lt;/div&gt;']
+									]
+								}
+							]
+						}
+				]
+			</code>
+		</pre>
+		<p>If you want to use Bootstrap tooltip or other jQuery plugin libraries such as datepickr, you will have to write a active function and put it to your data content. See the activeFunc function position of data content.</p>
+		<pre class="highlight">
+			<code>
+			function activeFunc(){
+					$(function () {
+							$('[data-toggle="tooltip"]').tooltip();
+							$('.datepicker').flatpickr({ defaultDate: '01-01-' + (new Date()).getFullYear(), dateFormat: 'd-M-Y' });
+					})   
+			}
+			</code>	
+		</pre>
+		<pre class="highlight">
+			<code>
+				$('.filterDev').filters({
+					data: data,
+					customEventHandler: function(target){
+						var target = $(target);
+						if(target.is(':checked')){
+							var targetDiv = target.closest('div.form-group');
+							var addEle = '&lt;div class="col-md-3 pull-right" name="'+target.attr('data-target')+'"&gt;&lt;select class="form-control"&gt;&lt;option value="lte"&gt;&lt;=&lt;/option&gt;&lt;option value="gte">>=&lt;/option&gt;&lt;/select>&lt;/div&gt;&lt;div class="col-md-3 pull-right" name="'+target.attr('data-target')+'"&gt;&lt;input type="text" class="form-control" placeholder="YTD" /&gt;&lt;/div&gt;';
+							targetDiv.append(addEle);
+						}
+						else{
+							var addParents = target.parents().eq(2);
+							var addChildren = addParents.find('div.col-md-3');
+							addChildren.remove();
+						}
+
+					}
+				});
+			</code>
+		</pre>
+	</div>
+	</div>
+		<script src="dist/bundle.js"></script>
+	</body>
+</html>

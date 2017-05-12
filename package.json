@@ -1,0 +1,34 @@
+{
+  "name": "filter-webpack",
+  "version": "0.0.1",
+  "description": "filter plugin webpack version",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server ./main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YangShuting/Filter-plugin.git"
+  },
+  "keywords": [
+    "filter",
+    "plugin"
+  ],
+  "author": "yangshuting",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YangShuting/Filter-plugin/issues"
+  },
+  "homepage": "https://github.com/YangShuting/Filter-plugin#readme",
+  "devDependencies": {
+    "css-loader": "^0.28.1",
+    "file-loader": "^0.11.1",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.2.1",
+    "style-loader": "^0.17.0",
+    "url-loader": "^0.5.8",
+    "webpack": "^2.5.1",
+    "webpack-dev-server": "^2.4.5"
+  }
+}

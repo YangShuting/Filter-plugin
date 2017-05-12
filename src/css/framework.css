@@ -1,0 +1,656 @@
+
+/* override - reduce default font sizes */
+@media only screen and (min-width: 992px) {
+	html {
+		font-size: 13px;
+	}
+}
+
+/* override - consistent fonts */
+body
+, .form-control {
+	color: #000;
+}
+button, input, optgroup, select, textarea {
+	font-family: inherit !important;
+}
+.dropdown-item:focus
+, .dropdown-item:hover {
+	background-color: #EEE !important;
+	color: #000 !important;
+}
+button, html [type="button"], [type="reset"], [type="submit"] {
+	-webkit-appearance: initial;
+}
+
+/* override - flatpickr-wrapper display inherit - Form group issue */
+.flatpickr-wrapper{
+	display: inherit !important;
+	width: 100%;
+}
+/* override - flatpickr fields shouldn't be grey */
+.flatpickr-input {
+	background-color: white !important;
+}
+
+/* override - darker borders */
+.btn
+, .card
+, .form-control
+, .table
+, .table-bordered th
+, .table-bordered td {
+	border-color: #DADADA !important;
+}
+
+/* override - top align table headers */
+.table thead th {
+	vertical-align: top;
+}
+
+/* override - make form labels bold */
+.col-form-label
+, .control-label
+, .table tr th {
+	font-weight: 600;
+}
+.form-group {
+	margin-bottom: .5rem
+}
+
+/* override - borders */
+.alert
+, .btn
+, .card
+, .dropdown-menu
+, .navbar-inverse
+, .tooltip-inner {
+	border: 1px solid #D6D6D6;
+}
+
+/* override - make buttons bold */
+.btn:not(.btn-sm) {
+	font-weight: 600;
+	padding: 0.385rem .75rem;
+}
+
+/* override - default tooltip colors */
+.tooltip.in { 
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+.tooltip-inner {
+    background-color: #FFF;
+    color: #000;
+	font-size: .98rem;
+	max-height: 350px;
+	overflow-y: auto;
+	text-align: left;
+}
+.tooltip.bs-tether-element-attached-bottom .tooltip-inner::before
+, .tooltip.tooltip-top .tooltip-inner::before {
+    border-top-color: #FFF;
+	display: none;
+}
+.tooltip.bs-tether-element-attached-top .tooltip-inner::before
+, .tooltip.tooltip-bottom .tooltip-inner::before {
+    border-bottom-color: #FFF;
+	display: none;
+}
+.tooltip.bs-tether-element-attached-right .tooltip-inner::before
+, .tooltip.tooltip-left .tooltip-inner::before {
+     border-left-color: #FFF;
+	 display: none;
+}
+.tooltip.bs-tether-element-attached-left .tooltip-inner::before
+, .tooltip.tooltip-right .tooltip-inner::before {
+     border-right-color: #FFF;
+	 display: none;
+}
+
+.tooltip.show {
+	opacity: 1.0 !important;
+}
+
+/* override - remove rounded corners */
+.navbar
+, .alert
+, .badge
+, .btn
+, .card
+, .card-header:first-child
+, .card-footer:last-child
+, .dropdown-menu
+, .form-control
+, .input-group-addon
+, .modal-content
+, .nav-tabs .nav-link
+, .navbar-toggler
+, .page-link
+, .paginate_button
+, .pagination
+, .select2-container--default .select2-selection--single
+, .select2-selection--multiple
+, .select2-container--open .select2-dropdown--below
+, .select2-container--default .select2-search--dropdown .select2-search__field
+, .select2-selection__choice
+, .tooltip-inner {
+	border-radius: 0px !important;
+}
+
+/* override - primary colors */
+.bg-primary {
+	color: white;
+}
+
+/* override - remove gradients in safari */
+select::-ms-expand { display: none; }
+select.form-control
+, .select2-container--default .select2-selection--single
+, .select2-selection--multiple {
+	-webkit-appearance: none;
+	background: #fff url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right 0.65rem center;
+	background-size: 8px 10px;
+}
+
+/* override - padding reductions */
+.alert {
+	padding: 0.60rem 1rem
+}
+.card-block {
+	padding: .8rem .9rem;
+}
+.card-footer {
+	padding: .60rem 1rem;
+}
+.card-header {
+	font-weight: 600;
+	padding: .60rem 1rem;
+}
+.form-control {
+	min-height: calc(2rem + 2px);
+	padding: 0.30rem 0.58rem;
+}
+.navbar {
+	padding: .24rem 1rem;
+}
+.page-link {
+	padding: 0.385rem 0.58rem;
+}
+.table th, .table td {
+	padding: .60rem .8rem;
+}
+.table {
+	background-color: white;
+}
+
+/* override - navbar link transparency */
+.navbar-light .navbar-nav .nav-link {
+	color: rgba(0, 0, 0, 0.85);
+}
+.navbar-inverse .navbar-nav .nav-link {
+	color: rgba(255, 255, 255, 0.85);
+}
+.navbar-light .navbar-nav .nav-link:focus
+, .navbar-light .navbar-nav .nav-link:hover {
+	color: rgba(0, 0, 0, 1);
+}
+.navbar-inverse .navbar-nav .nav-link:focus
+, .navbar-inverse .navbar-nav .nav-link:hover {
+	color: rgba(255, 255, 255, 1);
+}
+
+#navbar-top > span.scope-title {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+/* override - select2 styles */
+.select2-container {
+	width: 100% !important;
+}
+
+/* Separated out because for some reason, when the pseudo selectors are on the same line, it was not taking effect.*/
+.select2.select2-container--default .select2-selection--single .select2-selection__placeholder{
+	color: #000;
+}
+.select2.select2-container--default .select2-search--inline .select2-search__field::-webkit-input-placeholder{
+	color: #000;
+}
+.select2.select2-container--default .select2-search--inline .select2-search__field::-moz-placeholder{
+	color: #000;
+}
+.select2.select2-container--default .select2-search--inline .select2-search__field:-ms-input-placeholder{
+	color: #000;
+}
+.select2.select2-container--default .select2-search--inline .select2-search__field:-moz-placeholder{
+	color: #000;
+}
+.select2-container--default .select2-selection--single
+, .select2-selection--multiple
+, .select2-container--open .select2-dropdown--below
+, .select2-container--default .select2-search--dropdown .select2-search__field {
+	border: 1px solid rgba(0, 0, 0, 0.15) !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+	display: none !important;
+}
+select.form-control:not([size]):not([multiple]) {
+	height: calc(2rem + 2px);
+}
+.select2-container--default .select2-selection--single {
+	min-height: calc(2rem + 2px);
+}
+.select2-container--default .select2-selection--multiple
+, .select2-selection--multiple {
+	min-height: calc(2rem + 2px);
+}
+.select2-container .select2-search--inline .select2-search__field {
+	margin-top: 2px;
+}
+.select2-results__options {
+	background-color: white;
+}
+
+/* addon - easy loading screen */
+.loading {
+    height: 70px;
+    background-repeat: no-repeat;
+    background-image: url(/powersuite/library/framework/images/loading.gif);
+    background-position: center;
+    margin-bottom: 15px;
+    margin-top: 5px;
+}
+
+/* addon - shadows */
+.alert
+, .btn
+, .card
+, .dropdown-menu
+, .modal-content
+, .input-group-addon
+, .pagination
+, .tooltip-inner {
+	-moz-box-shadow: .3rem .3rem 0px -1px rgba(0,0,0,.04);
+	-webkit-box-shadow: .3rem .3rem 0px -1px rgba(0,0,0,.04);
+	box-shadow: .3rem .3rem 0px -1px rgba(0,0,0,.04);
+}
+.form-control
+, .select2-selection {
+	-moz-box-shadow: .2rem .2rem 0px -1px rgba(0,0,0,.05);
+	-webkit-box-shadow: .2rem .2rem 0px -1px rgba(0,0,0,.05);
+	box-shadow: .2rem .2rem 0px -1px rgba(0,0,0,.05);
+}
+
+/* addon - default primary & secondary colors */
+.bg-secondary {
+	background-color: rgba(0, 0, 0, 0.050);
+	color: black;
+}
+.table-secondary {
+	background-color: rgba(0, 0, 0, 0.040);
+}
+.table-striped tbody tr:nth-of-type(odd) {
+	background-color: rgba(255, 255, 255, 1);
+}
+.table-striped tbody tr:nth-of-type(even) {
+	background-color: rgba(245, 245, 245, 1);
+}
+.table-hover tbody tr:hover {
+	background-color: rgba(0, 0, 0, 0.075);
+}
+.bg-active {
+	background-color: rgba(0, 0, 0, 0.070) !important;
+}
+
+/* addon - table cards */
+div.table-card {
+	border: 0px;
+}
+div.table-card .card-header {
+	margin-bottom: 0px;
+}
+div.table-card .card-block {
+	padding: 0px;
+}
+div.table-card .card-block > table {
+	margin: 0px;
+}
+div.table-card .card-footer {
+	border: 1px solid #D6D6D6;
+	border-top: 0px;
+	padding: .60rem .8rem;
+}
+
+/* override - data-table styles */
+div.table-card.data-table .table.dataTable {
+	margin-bottom: 0px !important;
+}
+div.table-card.data-table div.card-block {
+	padding-bottom: .5rem;
+	padding-top: .5rem;
+}
+div.table-card.data-table {
+	border: 1px solid rgba(0, 0, 0, 0.125);
+}
+div.table-card.data-table .card-block {
+	padding-bottom: 15px;
+	padding-top: 15px;
+}
+div.table-card.data-table .card-block .table {
+	border-collapse: collapse !important;
+	border-left: 0px;
+	border-right: 0px;
+	width: 100% !important;
+}
+div.data-table .dataTables_length
+, div.data-table .dataTables_info {
+	float: left;
+}
+div.dataTables_filter
+, div.dataTables_paginate {
+	float: right;
+}
+
+/* override - tab styles */
+ul.nav.nav-tabs > li.nav-item > a.nav-link {
+	background-color: rgba(0, 0, 0, 0.035);
+	border-bottom: 1px solid #DDD !important;
+	border-color: #DDD #DDD #FFF;
+	margin-right: .5rem;
+}
+ul.nav.nav-tabs > li.nav-item > a.nav-link.active {
+	background-color: #FFF;
+	border-bottom: 1px solid #FFF !important;
+	font-weight: 600;
+}
+
+/* override - print in desktop mode */
+@media print {
+	body {
+		margin: 0 !important;
+		padding: 0 !important;
+		min-width: 1024px !important;
+	}
+	.container {
+		width: auto !important;
+		min-width: 1024px !important;
+	}
+}
+@page {
+    size: A3;
+	margin: 0.5cm;
+}
+
+/* addon - single record display */
+.single-record .row {
+	margin-left: -13px;
+	margin-right: -13px;
+}
+.single-record .row > div {
+	padding-bottom: .75rem;
+}
+.single-record .row > div:nth-child(odd) {
+	font-weight: 600;
+}
+@media only screen and (min-width: 992px) {
+	.single-record .row > div:nth-child(even) {
+		border-right: 1px solid #D6D6D6;
+	}
+}
+@media only screen and (max-width: 767px) {
+	.single-record .row > div:nth-child(odd) {
+		padding-bottom: 0rem;
+	}
+}
+
+/* addon - mobile table flip */
+@media only screen and (max-width: 991px) {
+	.no-more-tables table
+	, .no-more-tables thead
+	, .no-more-tables tbody
+	, .no-more-tables th
+	, .no-more-tables td
+	, .no-more-tables tr { 
+		display: block; 
+	}
+	.no-more-tables th {
+		display: none;
+	}
+	.no-more-tables thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	.no-more-tables tr { 
+		border: 1px solid #CCC; 
+	}
+	.no-more-tables td { 
+		border: none;
+		border-bottom: 1px solid #CCC; 
+		position: relative;
+		padding-left: 50%; 
+		white-space: normal;
+		text-align: left;
+	}
+	.no-more-tables td:before { 
+		position: absolute;
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+		text-align: left;
+		font-weight: 600;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.no-more-tables td:before { 
+		content: attr(data-title); 
+	}
+	.no-more-tables td:after {
+		content: "\00a0"; 
+	}
+
+	#navbar-top > span.scope-title {
+		padding-right: 60px;
+	}
+}
+
+/* addon - "hand" class */
+.btn:not([disabled])
+, .form-check-label
+, .pointer {
+	cursor: pointer;
+}
+
+/* addon - collapsible legends */
+legend a[data-toggle="collapse"]
+, legend a[data-toggle="collapse"]:hover
+, legend a[data-toggle="collapse"]:focus {
+	text-decoration: none;
+}
+legend a[data-toggle="collapse"].show-glyph:after {
+	font-family: FontAwesome;
+	content: "\f068";
+}
+legend a[data-toggle="collapse"].show-glyph.collapsed:after {
+	font-family: FontAwesome;
+	content: "\f067";
+}
+legend + .collapse div:first-child
+, legend + .collapsing div:first-child
+, legend + .collapse + .radio
+, legend + .collapsing + .radio
+, legend + .collapse + .checkbox
+, legend + .collapsing + .checkbox {
+	margin-top: -4px;
+}
+
+/* addon - collapsible labels */
+label a[data-toggle="collapse"]
+, label a[data-toggle="collapse"]:hover
+, label a[data-toggle="collapse"]:focus {
+	text-decoration: none;
+}
+label a[data-toggle="collapse"].show-glyph:after {
+	font-family: FontAwesome;
+	content: "\f068";
+}
+label a[data-toggle="collapse"].show-glyph.collapsed:after {
+	font-family: FontAwesome;
+	content: "\f067";
+}
+label + .collapse div:first-child
+, label + .collapsing div:first-child
+, label + .collapse + .radio
+, label + .collapsing + .radio
+, label + .collapse + .checkbox
+, label + .collapsing + .checkbox {
+	margin-top: -4px;
+}
+
+/* addon - prevent expansion of a chosen-select (plugin) dropdown with lots of options expanding to the full size of the select + hidden dropdown options and then snapping back to just the select's size */
+legend + .collapsing[aria-expanded="true"] .chosen-drop {
+	display: none;
+}
+
+/* primary color */
+.badge-primary
+, .btn-primary
+, .btn-outline-primary
+, .btn-outline-primary:hover
+, .bg-primary
+, .card-primary
+, #navbar-top
+, .navbar-inverse .navbar-nav .nav-link {
+	background-color: #4B4B4B !important;
+}
+.btn-primary
+, .btn-outline-primary
+, .btn-outline-primary:hover {
+	background-color: #4B4B4B !important;
+	color: #FFF !important;
+}
+.card .card-block
+, .card .card-deck {
+	background-color: rgba(0, 0, 0, 0.035) !important;
+}
+.card .card-footer {
+	background-color: rgba(0, 0, 0, 0.025) !important;
+}
+.text-primary {
+	color: #333 !important;
+}
+
+.btn-primary
+, .btn-outline-primary:hover {
+	border-color: #3B3B3B !important;
+}
+.btn-primary.active:not([disabled]) {
+	background-color: #3B3B3B !important;
+}
+.btn-primary:hover:not([disabled]) {
+	background-color: #3B3B3B !important;
+}
+
+/* secondary color */
+.badge-secondary
+, .btn-secondary
+, .btn-outline-secondary:hover
+, .bg-secondary
+, .progress-bar
+, .card-secondary
+, .page-item.active .page-link
+, .btn-outline-secondary
+, .page-item.active .page-link
+, .dropdown-item.active
+, .dropdown-item:active {
+	background-color: #60C9E6 !important;
+	color: #222 !important;
+}
+.text-secondary
+, .card-block .fa-question-circle
+, .card-header.bg-primary .fa-question-circle {
+	color: #50B9D6 !important;
+}
+.btn-secondary
+, .btn-outline-secondary:hover
+, .page-item.active .page-link {
+	border-color: #50B9D6 !important;
+}
+.btn-secondary.active:not([disabled]) {
+	background-color: #50B9D6 !important;
+}
+.btn-secondary:hover:not([disabled]) {
+	background-color: #50B9D6 !important;
+}
+a {
+	color: #0089B6;
+}
+
+.card.data-table .card-block {
+	background-color: #FFF !important;
+}
+
+table .btn-secondary {
+	background-color: #FFF !important;
+	border-color: #DDD !important;
+	color: black !important;
+}
+table .btn-secondary.active
+, table .btn-secondary:hover {
+	background-color: #EEE !important;
+	border-color: #DDD !important;
+}
+/*Custom Flatpickr Styles*/
+.flatpickr-calendar .arrowUp, .flatpickr-calendar .arrowDown{
+	opacity: 1;
+}
+.flatpickr-time{
+	border-bottom: 2px solid #fff;
+}
+.flatpickr-calendar .flatpickr-day.selected,
+.flatpickr-calendar .flatpickr-day.startRange,
+.flatpickr-calendar .flatpickr-day.endRange,
+.flatpickr-calendar .flatpickr-day.selected:focus,
+.flatpickr-calendar .flatpickr-day.startRange:focus,
+.flatpickr-calendar .flatpickr-day.endRange:focus,
+.flatpickr-calendar .flatpickr-day.selected:hover,
+.flatpickr-calendar .flatpickr-day.startRange:hover,
+.flatpickr-calendar .flatpickr-day.endRange:hover,
+.flatpickr-calendar .flatpickr-day.selected.prevMonthDay,
+.flatpickr-calendar .flatpickr-day.startRange.prevMonthDay,
+.flatpickr-calendar .flatpickr-day.endRange.prevMonthDay,
+.flatpickr-calendar .flatpickr-day.selected.nextMonthDay,
+.flatpickr-calendar .flatpickr-day.startRange.nextMonthDay,
+.flatpickr-calendar .flatpickr-day.endRange.nextMonthDay,
+.flatpickr-calendar .flatpickr-time .numInput.selected,
+.flatpickr-calendar .flatpickr-time .flatpickr-am-pm.selected,
+.flatpickr-calendar .flatpickr-time .flatpickr-am-pm:hover:hover,
+.flatpickr-calendar .flatpickr-confirm{
+	background: #25AAE1!important;
+	color: #fff;
+}
+.flatpickr-confirm{
+	color: #fff;
+}
+html div.popover {
+	border: 4px solid #159AD1;
+}
+html div.popover.right > .arrow:after{
+	border-right-color: #159AD1;
+
+}
+html div.popover.left > .arrow:after{
+	border-left-color: #159AD1;
+
+}
+html div.popover.top > .arrow:after{
+	border-top-color: #159AD1;
+
+}
+html div.popover.bottom > .arrow:after{
+	border-bottom-color: #159AD1;
+}
